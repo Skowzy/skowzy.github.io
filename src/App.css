@@ -1,184 +1,279 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+@custom-variant dark (&:is(.dark *));
+
+/* ──────────────────────────────────────────────────────────────
+   Palette sombre neutre. Une seule couleur d'accent : la lavande.
+   Les tokens MD3 « secondary » et « tertiary » sont volontairement
+   alignés sur le gris ou la lavande — sinon un `text-tertiary`
+   oublié quelque part rebranche le cyan ou le vert qu'on retire.
+   ────────────────────────────────────────────────────────────── */
+@theme {
+  --color-surface: #09090b;
+  --color-surface-dim: #09090b;
+  --color-surface-bright: #27272a;
+  --color-surface-container-lowest: #050506;
+  --color-surface-container-low: #101012;
+  --color-surface-container: #141417;
+  --color-surface-container-high: #18181b;
+  --color-surface-container-highest: #1f1f23;
+  --color-surface-variant: #1f1f23;
+  --color-on-surface: #fafafa;
+  --color-on-surface-variant: #a1a1aa;
+  --color-on-background: #fafafa;
+  --color-outline: #52525b;
+  --color-outline-variant: #27272a;
+  --color-inverse-surface: #fafafa;
+  --color-inverse-on-surface: #18181b;
+  --color-surface-tint: #c0c1ff;
+
+  --color-primary: #c0c1ff;
+  --color-on-primary: #09090b;
+  --color-primary-container: #2a2a4d;
+  --color-on-primary-container: #e1e0ff;
+  --color-primary-fixed: #e1e0ff;
+  --color-primary-fixed-dim: #c0c1ff;
+  --color-on-primary-fixed: #09090b;
+  --color-on-primary-fixed-variant: #4a4a80;
+  --color-inverse-primary: #4a4ad6;
+
+  --color-secondary: #1f1f23;
+  --color-on-secondary: #fafafa;
+  --color-secondary-container: #1f1f23;
+  --color-on-secondary-container: #e4e4e7;
+  --color-secondary-fixed: #1f1f23;
+  --color-secondary-fixed-dim: #27272a;
+  --color-on-secondary-fixed: #fafafa;
+  --color-on-secondary-fixed-variant: #a1a1aa;
+
+  --color-tertiary: #c0c1ff;
+  --color-on-tertiary: #09090b;
+  --color-tertiary-container: #2a2a4d;
+  --color-on-tertiary-container: #e1e0ff;
+  --color-tertiary-fixed: #e1e0ff;
+  --color-tertiary-fixed-dim: #c0c1ff;
+  --color-on-tertiary-fixed: #09090b;
+  --color-on-tertiary-fixed-variant: #4a4a80;
+
+  --color-error: #ff9d95;
+  --color-on-error: #3d0906;
+  --color-error-container: #5c1410;
+  --color-on-error-container: #ffdad6;
+
+  --spacing-space-2xs: 0.25rem;
+  --spacing-space-xs: 0.5rem;
+  --spacing-space-sm: 0.75rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+  --spacing-space-2xl: 3rem;
+  --spacing-space-3xl: 4rem;
+  --spacing-space-4xl: 6rem;
+  --spacing-gutter-mobile: 1.25rem;
+  --spacing-gutter-desktop: 2rem;
+  --spacing-max-content-width: 72rem;
+
+  --font-display: "Geist", sans-serif;
+  --font-display-mobile: "Geist", sans-serif;
+  --font-headline-lg: "Geist", sans-serif;
+  --font-headline-lg-mobile: "Geist", sans-serif;
+  --font-headline-md: "Geist", sans-serif;
+  --font-headline-sm: "Geist", sans-serif;
+  --font-micro-badge: "Geist", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-body-sm: "Inter", sans-serif;
+  --font-code-base: "JetBrains Mono", monospace;
+  --font-code-pill: "JetBrains Mono", monospace;
+
+  --text-display: 56px;
+  --text-display--line-height: 60px;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 600;
+
+  --text-display-mobile: 36px;
+  --text-display-mobile--line-height: 42px;
+  --text-display-mobile--letter-spacing: -0.025em;
+  --text-display-mobile--font-weight: 600;
+
+  --text-headline-lg: 36px;
+  --text-headline-lg--line-height: 42px;
+  --text-headline-lg--letter-spacing: -0.025em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-lg-mobile: 28px;
+  --text-headline-lg-mobile--line-height: 34px;
+  --text-headline-lg-mobile--letter-spacing: -0.02em;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-headline-md: 22px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--letter-spacing: -0.018em;
+  --text-headline-md--font-weight: 600;
+
+  --text-headline-sm: 17px;
+  --text-headline-sm--line-height: 24px;
+  --text-headline-sm--letter-spacing: -0.012em;
+  --text-headline-sm--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 30px;
+  --text-body-lg--letter-spacing: -0.01em;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 15px;
+  --text-body-md--line-height: 25px;
+  --text-body-md--letter-spacing: -0.005em;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 13.5px;
+  --text-body-sm--line-height: 21px;
+  --text-body-sm--letter-spacing: 0em;
+  --text-body-sm--font-weight: 400;
+
+  --text-code-base: 13px;
+  --text-code-base--line-height: 22px;
+  --text-code-base--letter-spacing: -0.01em;
+  --text-code-base--font-weight: 400;
+
+  --text-code-pill: 12px;
+  --text-code-pill--line-height: 16px;
+  --text-code-pill--letter-spacing: 0em;
+  --text-code-pill--font-weight: 500;
+
+  --text-micro-badge: 11.5px;
+  --text-micro-badge--line-height: 16px;
+  --text-micro-badge--letter-spacing: 0.04em;
+  --text-micro-badge--font-weight: 500;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+@theme inline {
+  --font-heading: var(--font-display);
+  --font-sans: "Geist", sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+:root {
+  --radius: 0.625rem;
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+  --primary: #c0c1ff;
+  --primary-foreground: #09090b;
+  --secondary: #1f1f23;
+  --secondary-foreground: #fafafa;
+  --muted: #1f1f23;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #ff9d95;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #c0c1ff;
+  --chart-1: #c0c1ff;
+  --chart-2: #a1a1aa;
+  --chart-3: #52525b;
+  --chart-4: #e1e0ff;
+  --chart-5: #71717a;
+  --sidebar: #141417;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #c0c1ff;
+  --sidebar-primary-foreground: #09090b;
+  --sidebar-accent: #27272a;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #27272a;
+  --sidebar-ring: #c0c1ff;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
   }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
+  body {
+    overscroll-behavior: none;
+    @apply bg-background text-foreground;
   }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
+  main > :first-child {
+    margin-top: 0 !important;
   }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
+  main > :last-child {
+    margin-bottom: 0 !important;
   }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-.ticks {
-  position: relative;
-  width: 100%;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  /* Grain : casse le noir plat sans motif reconnaissable. Le calque
+     couvre toute la page, header compris, pour qu'aucune frontière de
+     texture ne soit visible. `pointer-events: none` garde tout cliquable. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='200'%20height='200'%20filter='url(%23g)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+  @media (prefers-contrast: more) {
+    body::after { display: none; }
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+  /* Plancher d'accessibilité : un focus clavier visible partout, sans
+     écraser les styles des composants (spécificité 0). */
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
   }
 }
