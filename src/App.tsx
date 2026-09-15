@@ -69,12 +69,11 @@ const PROJETS: Projet[] = [
     resume:
       "Reprise d'une application de gestion de garage en PHP MVC, remontée sur une architecture actuelle.",
     points: [
-      "Version historique en PHP MVC, servie en local",
+      "Version historique en PHP MVC",
       "API Laravel, en cours",
       "Interface React, Vite et TypeScript, en cours",
-      "Migration de la base vers PostgreSQL, à venir",
     ],
-    stack: ["Laravel", "PHP", "React", "Vite", "PostgreSQL"],
+    stack: ["Laravel", "PHP", "React", "Vite"],
     statut: "Migration en cours",
     codeSource: "Dépôt public",
     lien: { href: "https://github.com/Skowzy/GarageApp", texte: "Voir le dépôt sur GitHub" },
